@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="Tic-Tac-Toe.css">
+    <link rel="shortcut icon" href="tic-tac-toe.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <h1>Tic Tac Toe</h1>
+
+        <div id="startScreen" class="screen">
+            <div class="game-logo-animation">
+                <span class="logo-x">X</span>
+                <span class="logo-o">O</span>
+            </div>
+            <p>Choose your opponent:</p>
+            <button id="playAiBtn">Play with AI</button>
+            <button id="playFriendBtn">Play with Friend</button>
+        </div>
+
+        <div id="nameEntryScreen" class="screen hidden">
+            <h2>Enter Your Names</h2>
+            <div class="names">
+                <input type="text" id="player1Name" placeholder="Player X Name">
+                <input type="text" id="player2Name" placeholder="Player O / AI Name">
+                <select id="modeSelect">
+                    <option value="ai">AI</option>
+                    <option value="2p">Two Player</option>
+                </select>
+                <select id="aiDifficulty">
+                    <option value="easy">Easy</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <button id="startGameBtn">Start Game</button>
+            <button onclick="saveNames()">💾 Save Names</button>
+            <button onclick="clearAll()">🧹 Clear Scores</button>
+            <button onclick="showScreen('start')">⬅️ Back</button>
+        </div>
+
+        <div id="gamePlayScreen" class="screen hidden">
+            <div class="scoreboard" aria-live="polite">
+                <div id="playerWins"></div>
+                <div id="aiWins"></div>
+                <div id="draws"></div>
+            </div>
+            <div class="status" id="statusText" aria-live="polite"></div>
+
+            <div class="board" id="board"></div>
+
+            <button onclick="resetGame()">🔄 Reset Game</button>
+            <button onclick="showScreen('start')">🏠 Main Menu</button>
+            <button onclick="toggleTheme()">🌓 Toggle Theme</button>
+        </div>
+    </div>
+
+    <script src="Tic-Tac-Toe.js"></script>
+</body>
+
+</html>

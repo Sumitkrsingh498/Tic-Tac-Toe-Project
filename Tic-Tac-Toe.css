@@ -1,0 +1,265 @@
+:root {
+    --bg-gradient-start: #0f2027;
+    --bg-gradient-mid: #203a43;
+    --bg-gradient-end: #2c5364;
+    --text-color: #f0f0f0;
+    --cell-bg: rgba(255, 255, 255, 0.1);
+    --cell-hover-bg: rgba(255, 255, 255, 0.2);
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-border: #ccc;
+    --button-bg: #3f51b5;
+    --button-hover-bg: #303f9f;
+    --button-text: white;
+    --x-color: #ff6b81;
+    --o-color: #4fc3f7;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.screen {
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.screen.hidden {
+    display: none;
+}
+
+#startScreen p {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#startScreen button {
+    margin: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    max-width: 250px;
+}
+
+.game-logo-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.game-logo-animation span {
+    font-size: 4rem;
+    font-weight: bold;
+    display: inline-block;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    padding: 0 10px;
+}
+
+.logo-x {
+    color: var(--x-color);
+    text-shadow: 0 0 10px var(--x-color), 0 0 20px var(--x-color);
+    animation-name: pulse-x;
+}
+
+.logo-o {
+    color: var(--o-color);
+    text-shadow: 0 0 10px var(--o-color), 0 0 20px var(--o-color);
+    animation-name: pulse-o;
+    animation-delay: 0.5s;
+}
+
+@keyframes pulse-x {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+}
+
+@keyframes pulse-o {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.1) rotate(-5deg); opacity: 0.8; }
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin: 1rem 0;
+}
+
+.cell {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: var(--cell-bg);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s, color 0.3s;
+}
+
+.cell:hover {
+    background-color: var(--cell-hover-bg);
+}
+
+.cell.x {
+    color: var(--x-color);
+    text-shadow: 0 0 5px var(--x-color), 0 0 10px var(--x-color);
+}
+
+.cell.o {
+    color: var(--o-color);
+    text-shadow: 0 0 5px var(--o-color), 0 0 10px var(--o-color);
+}
+
+.cell.winning-glow {
+    animation: winningCellGlow 1s infinite alternate;
+}
+
+@keyframes winningCellGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.5);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 0.8);
+        transform: scale(1.05);
+    }
+}
+
+select, input[type="text"], button {
+    padding: 0.5rem;
+    margin: 0.4rem;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    font-size: 1rem;
+    width: 100%;
+    max-width: 200px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+}
+#modeSelect {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.status {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.scoreboard div {
+    margin: 0.3rem 0;
+}
+
+body.dark {
+    --bg-gradient-start: #121212;
+    --bg-gradient-mid: #1a1a1a;
+    --bg-gradient-end: #222222;
+    --text-color: #f0f0f0;
+    --cell-bg: #222;
+    --cell-hover-bg: #333;
+    --input-border: #555;
+    --input-bg: #333;
+    --button-bg: #555;
+    --button-hover-bg: #666;
+    --button-text: #f0f0f0;
+}
+
+#aiDifficulty:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--input-bg);
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .cell {
+        font-size: 1.5rem;
+    }
+
+    select, input[type="text"], button {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+
+    .scoreboard {
+        font-size: 0.9rem;
+    }
+
+    #startScreen button {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+    }
+    .game-logo-animation span {
+        font-size: 3rem;
+    }
+}
